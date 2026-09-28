@@ -1,0 +1,22 @@
+flowchart TD
+  S([Gemini request]) --> M["Take next model in chain<br/>skip models that returned 404"]
+  M --> CALL[["generate_content with JSON schema<br/>max 8 concurrent calls"]]
+  CALL --> OK{"Success?"}
+  OK -- Yes --> PARSE["Parse into Pydantic schema"] --> RET([Return result and model name])
+  OK -- No --> T{"Error type?"}
+  T -- "400 thinking unsupported" --> NT["Retry same model<br/>without thinking config"] --> CALL
+  T -- "404 model gone" --> DEAD["Mark model dead"] --> MORE
+  T -- "429 or 503 busy" --> MORE{"More models<br/>in chain?"}
+  T -- "500, 502, 504, timeout, bad JSON" --> BK["Back off 1-3 s,<br/>retry, max 2 attempts"] --> CALL
+  T -- "Other 4xx" --> RAISE([Raise error])
+  MORE -- Yes --> M
+  MORE -- No --> LAST["Final patient pass:<br/>wait 3 s per model"]
+  LAST --> L2{"Any success?"}
+  L2 -- Yes --> RET
+  L2 -- No --> FAIL([Raise LLMUnavailable])
+  classDef se fill:#e8e3d6,stroke:#1d1b16
+  classDef de fill:#fff4e0,stroke:#9a6410
+  classDef ex fill:#fbeceb,stroke:#c8321e,stroke-width:1.6px
+  class S,RET,RAISE,FAIL se
+  class OK,T,MORE,L2 de
+  class CALL ex

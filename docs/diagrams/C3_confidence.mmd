@@ -1,0 +1,21 @@
+flowchart TD
+  S([Answer to assess]) --> B{"Answer text blank?"}
+  B -- Yes --> BA{"Cross-check reader<br/>also found nothing?"}
+  BA -- Yes --> H0["high: confident zero"]
+  BA -- No --> L0["low: readers disagree on blank"]
+  B -- No --> SIG["Collect signals"]
+  SIG --> MJ["MAJOR if:<br/>OCR agreement below 65%<br/>30% or more lines low legibility<br/>grading runs spread at least max 1, 20% of marks<br/>rubric vs similarity gap at least 45%<br/>diagram mentioned but not detected"]
+  SIG --> MN["MINOR if:<br/>OCR agreement below 82%, some hard words<br/>crossed-out lines, multi-page answer<br/>label only from regex, runs varied a little<br/>unstable criteria, gap at least 30%<br/>diagram marks, mostly partial, short answer, margin notes"]
+  MJ --> D1{"Any MAJOR?"}
+  MN --> D1
+  D1 -- Yes --> LOW["low: needs review"]
+  D1 -- No --> D2{"Any MINOR?"}
+  D2 -- Yes --> MED["medium"]
+  D2 -- No --> HIGH["high"]
+  LOW --> R([Reason = top 1-2 signals of highest severity])
+  MED --> R
+  HIGH --> R
+  classDef se fill:#e8e3d6,stroke:#1d1b16
+  classDef de fill:#fff4e0,stroke:#9a6410
+  class S,R se
+  class B,BA,D1,D2 de

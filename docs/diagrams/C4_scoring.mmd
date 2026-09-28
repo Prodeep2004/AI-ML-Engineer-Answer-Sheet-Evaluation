@@ -1,0 +1,15 @@
+flowchart LR
+  A[/"Non-blank answers<br/>plus rubric criteria"/] --> P["Build one judge prompt<br/>for the whole sheet"]
+  P --> R0[["Run 0<br/>temperature 0.0"]]
+  P --> R1[["Run 1<br/>temperature 0.5"]]
+  P --> R2[["Run 2<br/>temperature 0.5"]]
+  R0 --> V["Verdict per criterion:<br/>met = 1, partial = 0.5, not met = 0<br/>times criterion marks"]
+  R1 --> V
+  R2 --> V
+  V --> M["Median per criterion<br/>agreement = share of runs matching"]
+  M --> T["Sum, round to nearest 0.5"]
+  T --> O[/"score, run_scores,<br/>criteria with evidence"/]
+  classDef ex fill:#fbeceb,stroke:#c8321e,stroke-width:1.6px
+  classDef io fill:#eaf1f8,stroke:#2b5c8a
+  class R0,R1,R2 ex
+  class A,O io

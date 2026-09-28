@@ -1,0 +1,31 @@
+flowchart TD
+  S([From Part 1: one segment per question]) --> B1{"Answer text<br/>blank?"}
+  B1 -- Yes --> Z0["Score 0, no LLM call<br/>score._blank"]
+  B1 -- No --> G2[["Google Gemini judge<br/>all answers in one prompt<br/>3 runs in parallel"]]
+  G2 --> AG["Verdicts to marks<br/>median per criterion, round to 0.5<br/>score._aggregate"]
+  AG --> G3[["Google Gemini embeddings<br/>similarity to model answer, one batch"]]
+  Z0 --> CF
+  G3 --> CF["Collect confidence signals<br/>confidence.assess"]
+  CF --> L1{"Any MAJOR signal?"}
+  L1 -- Yes --> LOW["low: needs review"]
+  L1 -- No --> L2{"Any MINOR signal?"}
+  L2 -- Yes --> MED["medium"]
+  L2 -- No --> HIGH["high"]
+  LOW --> R1
+  MED --> R1
+  HIGH --> R1[("app.db: save result JSON<br/>status = done")]
+  R1 --> UI[/"UI polls GET /api/evaluations/id<br/>renders question cards"/]
+  UI --> EX[/"Export results.csv or results.json"/]
+  EX --> X([End])
+  classDef se fill:#e8e3d6,stroke:#1d1b16,stroke-width:1.2px
+  classDef pr fill:#fffdf8,stroke:#1d1b16
+  classDef de fill:#fff4e0,stroke:#9a6410
+  classDef io fill:#eaf1f8,stroke:#2b5c8a
+  classDef db fill:#eef5ef,stroke:#2f6b4f
+  classDef ex fill:#fbeceb,stroke:#c8321e,stroke-width:1.6px
+  class S,X se
+  class Z0,AG,CF,LOW,MED,HIGH pr
+  class B1,L1,L2 de
+  class UI,EX io
+  class R1 db
+  class G2,G3 ex

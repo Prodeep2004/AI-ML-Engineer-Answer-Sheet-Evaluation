@@ -1,0 +1,26 @@
+sequenceDiagram
+  autonumber
+  participant B as Browser (React)
+  participant A as FastAPI routes.py
+  participant J as Background job jobs.py
+  participant P as Pipeline runner.py
+  participant G as Google Gemini API
+  participant D as SQLite app.db
+  B->>A: POST /api/evaluations (rubric_id, files[])
+  A->>D: insert EvaluationRow (queued)
+  A->>J: asyncio.create_task(_run)
+  A-->>B: 200 {id}
+  loop every 1 second until done or error
+    B->>A: GET /api/evaluations/{id}
+    A->>D: read row
+    A-->>B: status, stage, detail
+  end
+  J->>P: evaluate(files, rubric, pages)
+  P->>G: page transcriptions (2 readers per page)
+  P->>G: judge runs x3 + one embedding batch
+  P-->>J: EvaluationResult
+  J->>D: save result JSON, status done
+  B->>A: GET /api/evaluations/{id}
+  A-->>B: result + page image URLs
+  B->>A: GET /api/evaluations/{id}/export?fmt=csv
+  A-->>B: results-{id}.csv

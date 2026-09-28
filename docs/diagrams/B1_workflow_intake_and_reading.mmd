@@ -1,0 +1,28 @@
+flowchart TD
+  S([Start]) --> U[/"User uploads page images or PDFs<br/>and selects a rubric"/]
+  U --> P1["POST /api/evaluations<br/>routes.create_evaluation"]
+  P1 --> V1{"Rubric exists?<br/>1-30 files, allowed type,<br/>each at most 25 MB?"}
+  V1 -- No --> E1[/"HTTP 400 or 404 error<br/>shown in UI"/]
+  E1 --> X([End])
+  V1 -- Yes --> D1[("app.db: insert EvaluationRow<br/>status = queued")]
+  D1 --> J1["Start background task, return id<br/>jobs.start"]
+  J1 --> PR["Preprocess each page<br/>EXIF rotate, resize, deskew, CLAHE<br/>preprocess.prepare"]
+  PR --> FS[("storage/evals/id/pageN.jpg")]
+  FS --> C1{"Transcription cached<br/>for this image hash?"}
+  C1 -- Yes --> SEG
+  C1 -- No --> G1[["Google Gemini vision<br/>primary reader + cross-check reader<br/>in parallel, JSON lines"]]
+  G1 --> K1[("cache.db: store transcription")]
+  K1 --> SEG["Segment lines by question<br/>state machine: spill-over, diagrams,<br/>crossed-out removed · segment.segment"]
+  SEG --> N([Continue in Part 2])
+  classDef se fill:#e8e3d6,stroke:#1d1b16,stroke-width:1.2px
+  classDef pr fill:#fffdf8,stroke:#1d1b16
+  classDef de fill:#fff4e0,stroke:#9a6410
+  classDef io fill:#eaf1f8,stroke:#2b5c8a
+  classDef db fill:#eef5ef,stroke:#2f6b4f
+  classDef ex fill:#fbeceb,stroke:#c8321e,stroke-width:1.6px
+  class S,X,N se
+  class P1,J1,PR,SEG pr
+  class V1,C1 de
+  class U,E1 io
+  class D1,FS,K1 db
+  class G1 ex

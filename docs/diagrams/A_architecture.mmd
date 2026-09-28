@@ -1,0 +1,51 @@
+flowchart TB
+  subgraph CLIENT["Client: browser on localhost"]
+    UI["React 19 SPA · TypeScript<br/>Home · EvaluationView · Rubrics · RubricEditor<br/>hash routing, polling every 1 s"]
+  end
+  subgraph CLI["Terminal"]
+    CL["cli.py<br/>writes outputs/results.json + .csv"]
+  end
+  subgraph SERVER["FastAPI + Uvicorn · single process · port 8000"]
+    R["REST API /api/*<br/>routes.py"]
+    ST["Static files<br/>built UI + /files/evals page images"]
+    JB["Background jobs<br/>asyncio tasks · jobs.py"]
+    subgraph PIPE["Pipeline · app/pipeline"]
+      PP["preprocess<br/>OpenCV, PyMuPDF, Pillow"]
+      EXT["extract"]
+      SG["segment"]
+      SC["score"]
+      CO["confidence<br/>rapidfuzz"]
+    end
+    GM["Gemini client · llm/gemini.py<br/>fallback chain, retries, semaphore 8"]
+    CA["cache.py"]
+    DBM["db.py · SQLModel"]
+  end
+  subgraph STORE["Local disk · backend/storage"]
+    APPDB[("app.db<br/>rubrics, evaluations")]
+    CDB[("cache.db<br/>key-value")]
+    IMG[("evals/id/pageN.jpg")]
+  end
+  subgraph GOOGLE["External · Google Cloud"]
+    GV[["Gemini vision + text models<br/>generateContent, JSON schema"]]
+    GE[["gemini-embedding-2<br/>embedContent"]]
+  end
+  UI -- "HTTP JSON + multipart" --> R
+  UI -- "GET page images, UI assets" --> ST
+  R --> DBM
+  R --> JB
+  JB --> PP --> EXT --> SG --> SC --> CO
+  JB --> IMG
+  CL --> PP
+  EXT --> GM
+  SC --> GM
+  EXT <--> CA
+  SC <--> CA
+  GM -- "HTTPS, API key" --> GV
+  GM -- "HTTPS, API key" --> GE
+  DBM <--> APPDB
+  CA <--> CDB
+  ST --> IMG
+  classDef ex fill:#fbeceb,stroke:#c8321e,stroke-width:1.6px
+  classDef db fill:#eef5ef,stroke:#2f6b4f
+  class GV,GE ex
+  class APPDB,CDB,IMG db

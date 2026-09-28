@@ -1,0 +1,19 @@
+flowchart TD
+  S([Next line, in page order]) --> L{"Valid question label?<br/>model label or regex match,<br/>and qno is in the rubric"}
+  L -- Yes --> O["Open or re-open that question<br/>strip label prefix from text"]
+  L -- No --> C{"A question<br/>already open?"}
+  C -- No --> DROP["Drop line<br/>preamble: name, roll no."]
+  C -- Yes --> P{"First line on a new page<br/>for this question?"}
+  P -- Yes --> SP["Flag continued_unlabelled<br/>spill-over"]
+  P -- No --> APP
+  SP --> APP["Append line to open question<br/>record page number"]
+  O --> APP
+  APP --> N{"More lines?"}
+  DROP --> N
+  N -- Yes --> S
+  N -- No --> OUT([Segments per question])
+  OUT --> ST["scoring_text: skip crossed-out lines,<br/>keep DIAGRAM tags in place,<br/>tag MARGIN NOTE, keep indentation"]
+  classDef se fill:#e8e3d6,stroke:#1d1b16
+  classDef de fill:#fff4e0,stroke:#9a6410
+  class S,OUT se
+  class L,C,P,N de

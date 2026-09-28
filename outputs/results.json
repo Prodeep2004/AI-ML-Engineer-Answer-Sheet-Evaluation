@@ -1,0 +1,689 @@
+{
+  "rubric_id": "python-basics-v1",
+  "subject": "Python Programming — Core Concepts",
+  "pages": 1,
+  "total_score": 8.5,
+  "total_marks": 37.0,
+  "elapsed_s": 0.8,
+  "models_used": {
+    "reader": "gemini-3.5-flash-lite (cached)",
+    "cross_reader": "gemini-3.5-flash-lite (cached)"
+  },
+  "answers": [
+    {
+      "question_no": "Q1",
+      "question": "What is the difference between a list and a tuple in Python? Give one example of each.",
+      "pages": [
+        1
+      ],
+      "extracted_text": "List is mutable and uses []; Tuple\nis immutable and uses ()",
+      "raw_lines": [
+        {
+          "text": "List is mutable and uses []; Tuple",
+          "question_label": "Q1",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "is immutable and uses ()",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 2.5,
+      "max_marks": 4.0,
+      "score_vs_key": "2.5/4 · c1✓ c2✓ c3½ c4✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "States that a list is mutable (can be changed after creation)",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "List is mutable",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "States that a tuple is immutable (cannot be changed after creation)",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "Tuple is immutable",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "Gives a correct example of each: list with [] and tuple with ()",
+          "marks": 1.0,
+          "awarded": 0.5,
+          "verdict": "partial",
+          "evidence": "uses []; Tuple is immutable and uses ()",
+          "agreement": 0.6666666666666666
+        },
+        {
+          "id": "c4",
+          "desc": "Mentions one further difference or use-case: tuples hashable/usable as dict keys, faster, less memory, or used for fixed data",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        3.0,
+        2.5,
+        2.5
+      ],
+      "embedding_similarity": 0.841,
+      "embedding_score": 2.26,
+      "ocr_agreement": 100.0,
+      "confidence": "medium",
+      "reason": "Grading runs varied by 0.5 marks.",
+      "signals": [
+        "Grading runs varied by 0.5 marks"
+      ],
+      "comment": "The student correctly states the mutability of lists and tuples and their respective brackets, but omits any further difference."
+    },
+    {
+      "question_no": "Q2",
+      "question": "Explain mutable and immutable objects in Python with an example. Draw a diagram showing what happens in memory when you run: a = [1, 2]; b = a; b.append(3).",
+      "pages": [
+        1
+      ],
+      "extracted_text": "Mutable objects can be changed ;\nimmutable objects cannot be changed\nafter creation",
+      "raw_lines": [
+        {
+          "text": "Mutable objects can be changed ;",
+          "question_label": "Q2",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "immutable objects cannot be changed",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "after creation",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 1.0,
+      "max_marks": 5.0,
+      "score_vs_key": "1/5 · c1½ c2½ c3✗ c4✗ c5✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "Correct definition of mutable objects with at least one example type (list/dict/set)",
+          "marks": 1.0,
+          "awarded": 0.5,
+          "verdict": "partial",
+          "evidence": "Mutable objects can be changed",
+          "agreement": 0.6666666666666666
+        },
+        {
+          "id": "c2",
+          "desc": "Correct definition of immutable objects with at least one example type (int/str/tuple)",
+          "marks": 1.0,
+          "awarded": 0.5,
+          "verdict": "partial",
+          "evidence": "immutable objects cannot be changed after creation",
+          "agreement": 0.6666666666666666
+        },
+        {
+          "id": "c3",
+          "desc": "Explains that a and b reference the SAME list object (assignment does not copy)",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "States that after b.append(3), a also shows [1, 2, 3]",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c5",
+          "desc": "Diagram: two names/variables pointing to one shared list object",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        2.0,
+        1.0,
+        1.0
+      ],
+      "embedding_similarity": 0.783,
+      "embedding_score": 1.65,
+      "ocr_agreement": 99.4,
+      "confidence": "low",
+      "reason": "Repeated grading runs disagree by 1 marks.",
+      "signals": [
+        "Repeated grading runs disagree by 1 marks",
+        "Unstable verdicts on c1, c2"
+      ],
+      "comment": "The student provides general definitions for mutable and immutable objects but fails to explain the variable referencing or the memory diagram."
+    },
+    {
+      "question_no": "Q3",
+      "question": "What is a decorator in Python? Write a simple decorator that prints 'Start' before and 'End' after a function runs.",
+      "pages": [
+        1
+      ],
+      "extracted_text": "A decorator adds extra functionality\nto a function without changing its\noriginal code",
+      "raw_lines": [
+        {
+          "text": "A decorator adds extra functionality",
+          "question_label": "Q3",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "to a function without changing its",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "original code",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 1.0,
+      "max_marks": 5.0,
+      "score_vs_key": "1/5 · c1✓ c2✗ c3✗ c4✗ c5✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "Defines a decorator as a function that takes a function and extends/modifies its behaviour without changing its code",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "A decorator adds extra functionality to a function without changing its original code",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "Mentions the @ syntax for applying a decorator",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "Code defines an inner wrapper function that calls the original function",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "Wrapper prints 'Start' before and 'End' after the call",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c5",
+          "desc": "Decorator returns the wrapper function (return wrapper)",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "embedding_similarity": 0.767,
+      "embedding_score": 1.35,
+      "ocr_agreement": 100.0,
+      "confidence": "high",
+      "reason": "Clear handwriting, readers agree and grading runs are consistent.",
+      "signals": [],
+      "comment": "The student correctly defines what a decorator does conceptually, but does not provide the syntax or the code implementation."
+    },
+    {
+      "question_no": "Q4",
+      "question": "What is a generator in Python? How is it different from a normal function that returns a list?",
+      "pages": [
+        1
+      ],
+      "extracted_text": "A generator produces values one at a time using yield",
+      "raw_lines": [
+        {
+          "text": "A generator produces values one at a time using yield",
+          "question_label": "Q4",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 1.5,
+      "max_marks": 4.0,
+      "score_vs_key": "1.5/4 · c1✓ c2½ c3✗ c4✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "States that a generator uses the yield keyword",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "using yield",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "Explains values are produced one at a time / lazily, and the function pauses and resumes its state",
+          "marks": 1.0,
+          "awarded": 0.5,
+          "verdict": "partial",
+          "evidence": "produces values one at a time",
+          "agreement": 0.6666666666666666
+        },
+        {
+          "id": "c3",
+          "desc": "Contrasts with a list: the generator does not store all values in memory (memory-efficient)",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "Gives a correct example or mentions next()/iteration, or that it can be iterated only once",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        2.0,
+        1.5,
+        1.5
+      ],
+      "embedding_similarity": 0.81,
+      "embedding_score": 1.77,
+      "ocr_agreement": 100.0,
+      "confidence": "medium",
+      "reason": "Grading runs varied by 0.5 marks.",
+      "signals": [
+        "Grading runs varied by 0.5 marks"
+      ],
+      "comment": "The student mentions the use of yield and producing values one at a time, but misses the contrast with lists and memory efficiency."
+    },
+    {
+      "question_no": "Q5",
+      "question": "Explain exception handling in Python using try, except, else and finally, with an example.",
+      "pages": [
+        1
+      ],
+      "extracted_text": "",
+      "raw_lines": [
+        {
+          "text": "",
+          "question_label": "Q5",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 0.0,
+      "max_marks": 5.0,
+      "score_vs_key": "0/5 · c1✗ c2✗ c3✗ c4✗ c5✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "try block contains code that might raise an exception",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "except block handles/catches the error, ideally a specific exception type",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "else block runs only when no exception occurs",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "finally block always runs (used for cleanup)",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c5",
+          "desc": "Gives a correct, working code example",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        0.0
+      ],
+      "embedding_similarity": null,
+      "embedding_score": null,
+      "ocr_agreement": 100.0,
+      "confidence": "high",
+      "reason": "Question number written but no answer given. Awarded 0.",
+      "signals": [
+        "blank"
+      ],
+      "comment": "No answer written."
+    },
+    {
+      "question_no": "Q6",
+      "question": "Write a list comprehension that creates a list of the squares of all even numbers from 1 to 10. What is the output?",
+      "pages": [
+        1
+      ],
+      "extracted_text": "List comprehesion creates the list",
+      "raw_lines": [
+        {
+          "text": "List comprehesion creates the list",
+          "question_label": "Q6",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 0.0,
+      "max_marks": 3.0,
+      "score_vs_key": "0/3 · c1✗ c2✗ c3✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "Correct list-comprehension syntax: [expression for x in iterable]",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "Correct range 1..10 and even-number filter (x % 2 == 0, or range(2, 11, 2))",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "Correct output [4, 16, 36, 64, 100]",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "embedding_similarity": 0.737,
+      "embedding_score": 0.44,
+      "ocr_agreement": 100.0,
+      "confidence": "high",
+      "reason": "Clear handwriting, readers agree and grading runs are consistent.",
+      "signals": [],
+      "comment": "The student only makes a generic statement about list comprehensions without writing the actual code or output."
+    },
+    {
+      "question_no": "Q7",
+      "question": "Explain inheritance and method overriding in Python with a suitable example.",
+      "pages": [
+        1
+      ],
+      "extracted_text": "inheritance allow to use parents class",
+      "raw_lines": [
+        {
+          "text": "inheritance allow to use parents class",
+          "question_label": "Q7",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 0.5,
+      "max_marks": 6.0,
+      "score_vs_key": "0.5/6 · c1½ c2✗ c3✗ c4✗ c5✗ c6✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "Defines inheritance: child class acquires attributes/methods of parent class",
+          "marks": 1.0,
+          "awarded": 0.5,
+          "verdict": "partial",
+          "evidence": "inheritance allow to use parents class",
+          "agreement": 0.6666666666666666
+        },
+        {
+          "id": "c2",
+          "desc": "Mentions the benefit: code reuse / extensibility",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "Correct syntax class Child(Parent)",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "Defines method overriding: child redefines a parent method with the same name",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c5",
+          "desc": "Mentions super() to call the parent method, OR lists types of inheritance",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c6",
+          "desc": "Gives a correct example showing overriding and which version runs",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        1.0,
+        0.5,
+        0.5
+      ],
+      "embedding_similarity": 0.749,
+      "embedding_score": 1.17,
+      "ocr_agreement": 98.7,
+      "confidence": "medium",
+      "reason": "Grading runs varied by 0.5 marks.",
+      "signals": [
+        "Grading runs varied by 0.5 marks"
+      ],
+      "comment": "The student mentions that inheritance allows using a parent's class, but lacks details on syntax, method overriding, and examples."
+    },
+    {
+      "question_no": "Q8",
+      "question": "What is the difference between == and is in Python?",
+      "pages": [
+        1
+      ],
+      "extracted_text": "== checks value equality else is checks whether\ntwo values refer to the same object.",
+      "raw_lines": [
+        {
+          "text": "== checks value equality else is checks whether",
+          "question_label": "Q8",
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        },
+        {
+          "text": "two values refer to the same object.",
+          "question_label": null,
+          "crossed_out": false,
+          "margin_note": false,
+          "is_diagram": false,
+          "legibility": "high",
+          "page": 1
+        }
+      ],
+      "score": 2.0,
+      "max_marks": 5.0,
+      "score_vs_key": "2/5 · c1✓ c2✓ c3✗ c4✗",
+      "criteria": [
+        {
+          "id": "c1",
+          "desc": "== checks value equality",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "== checks value equality",
+          "agreement": 1.0
+        },
+        {
+          "id": "c2",
+          "desc": "is checks identity: same object in memory / same id()",
+          "marks": 1.0,
+          "awarded": 1.0,
+          "verdict": "met",
+          "evidence": "is checks whether two values refer to the same object.",
+          "agreement": 1.0
+        },
+        {
+          "id": "c3",
+          "desc": "Example where == is True but is is False (e.g. two equal lists)",
+          "marks": 2.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        },
+        {
+          "id": "c4",
+          "desc": "Mentions typical use of is with None, or the id() function",
+          "marks": 1.0,
+          "awarded": 0.0,
+          "verdict": "not_met",
+          "evidence": "",
+          "agreement": 1.0
+        }
+      ],
+      "judge_run_scores": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "embedding_similarity": 0.768,
+      "embedding_score": 1.36,
+      "ocr_agreement": 100.0,
+      "confidence": "high",
+      "reason": "Clear handwriting, readers agree and grading runs are consistent.",
+      "signals": [],
+      "comment": "The student correctly explains the definitions of == and is, but does not provide an example or mention None/id()."
+    }
+  ]
+}
